@@ -43,6 +43,49 @@ P.S. You can delete this when you're done too. It's your config now :)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
+-- neogit
+vim.keymap.set('n', '<leader>gg', ':Neogit<CR>', { desc = 'Run neogit' })
+
+-- terminal exit key remap
+vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
+vim.keymap.set('n', '<leader>t', ':ToggleTerm<CR>', { desc = 'Toggle a horizontal terminal' })
+vim.keymap.set('n', '<leader>vt', ':ToggleTerm direction=vertical size=100 <CR>', { desc = 'Toggle a vertical terminal' })
+vim.keymap.set('n', '<leader>ft', ':ToggleTerm direction=float <CR>', { desc = 'Toggle a floating terminal' })
+
+-- format the code
+vim.keymap.set('n', '<leader>cf', ':Format<CR>', { desc = 'Format the document' })
+
+
+-- buffers
+vim.keymap.set('n', '<leader>bk', ':BufferClose<CR>', { desc = 'Buffer close' })
+vim.keymap.set('n', '<leader>bk!', ':BufferClose!<CR>', { desc = 'Buffer close without saving anything' })
+vim.keymap.set('n', '<leader>bn', ':bnext<CR>', { desc = 'Switch to next buffer' })
+vim.keymap.set('n', '<leader>bp', ':bprev<CR>', { desc = 'Switch to previous buffer' })
+
+
+-- explorer 
+vim.g.netrw_liststyle = 3
+-- vim.keymap.set('n', '<leader>ve', ':Vexplore<CR>', { desc = 'Toggle an explorer' })
+-- vim.keymap.set('n', '<leader>e', ':Explore<CR>', { desc = 'Toggle an explorer' })
+vim.keymap.set('n', '<leader>e', function ()
+    local relative_path = vim.fn.expand("%:h")
+    local startPos, endPos = string.find(relative_path, "/")
+    if startPos == 1 then
+       relative_path = "."
+    end
+    vim.cmd [[:let @/=expand("%:t")]]
+    vim.cmd("Lexplore " .. relative_path)
+    print(startPos)
+    if startPos and startPos > 1 then
+        while startPos ~= nil do
+            startPos, endPos = string.find(relative_path, "/", endPos + 1)
+            vim.cmd("call netrw#Call('NetrwBrowseUpDir', 1)")
+        end
+        vim.cmd("call netrw#Call('NetrwBrowseUpDir', 1)")
+        vim.cmd(":normal n<CR>zz")
+    end
+end)
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -128,29 +171,27 @@ require('lazy').setup({
 
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
-        vim.keymap.set({'n', 'v'}, ']c', function()
-          if vim.wo.diff then return ']c' end
-          vim.schedule(function() gs.next_hunk() end)
+        vim.keymap.set({ 'n', 'v' }, ']c', function()
+          if vim.wo.diff then
+            return ']c'
+          end
+          vim.schedule(function()
+            gs.next_hunk()
+          end)
           return '<Ignore>'
-        end, {expr=true, buffer = bufnr, desc = "Jump to next hunk"})
-        vim.keymap.set({'n', 'v'}, '[c', function()
-          if vim.wo.diff then return '[c' end
-          vim.schedule(function() gs.prev_hunk() end)
+        end, { expr = true, buffer = bufnr, desc = 'Jump to next hunk' })
+        vim.keymap.set({ 'n', 'v' }, '[c', function()
+          if vim.wo.diff then
+            return '[c'
+          end
+          vim.schedule(function()
+            gs.prev_hunk()
+          end)
           return '<Ignore>'
-        end, {expr=true, buffer = bufnr, desc = "Jump to previous hunk"})
+        end, { expr = true, buffer = bufnr, desc = 'Jump to previous hunk' })
       end,
     },
   },
-
-  {
-    -- Theme inspired by Atom
-    'navarasu/onedark.nvim',
-    priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
-  },
-
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -167,12 +208,13 @@ require('lazy').setup({
 
   {
     -- Add indentation guides even on blank lines
-    'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
+    'lukas-reineke/indent-blankline.nvim',
+    main="ibl",
     opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
+      -- char = '|',
+      -- show_trailing_blankline_indent = true,
     },
   },
 
@@ -212,7 +254,7 @@ require('lazy').setup({
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
+  require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -221,7 +263,7 @@ require('lazy').setup({
   --    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-  -- { import = 'custom.plugins' },
+  { import = 'custom.plugins' },
 }, {})
 
 -- [[ Setting options ]]
@@ -325,7 +367,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'v' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -390,8 +432,13 @@ require('nvim-treesitter.configs').setup {
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
+-- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+
+
+vim.cmd([[au BufNewFile,BufRead *.v set filetype=vlang]])
+
+require('lspconfig').vls.setup({})
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
@@ -484,8 +531,9 @@ mason_lspconfig.setup_handlers {
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,
     }
-  end
+  end,
 }
+
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
