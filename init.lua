@@ -75,7 +75,6 @@ vim.keymap.set('n', '<leader>e', function ()
     end
     vim.cmd [[:let @/=expand("%:t")]]
     vim.cmd("Lexplore " .. relative_path)
-    print(startPos)
     if startPos and startPos > 1 then
         while startPos ~= nil do
             startPos, endPos = string.find(relative_path, "/", endPos + 1)
@@ -84,6 +83,7 @@ vim.keymap.set('n', '<leader>e', function ()
         vim.cmd("call netrw#Call('NetrwBrowseUpDir', 1)")
         vim.cmd(":normal n<CR>zz")
     end
+    vim.cmd(":vertical resize -30")
 end)
 
 -- Install package manager
