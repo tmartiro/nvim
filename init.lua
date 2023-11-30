@@ -57,8 +57,8 @@ vim.keymap.set('n', '<leader>cf', ':Format<CR>', { desc = 'Format the document' 
 
 
 -- buffers
-vim.keymap.set('n', '<leader>bk', ':BufferClose<CR>', { desc = 'Buffer close' })
-vim.keymap.set('n', '<leader>bk!', ':BufferClose!<CR>', { desc = 'Buffer close without saving anything' })
+vim.keymap.set('n', '<leader>bk', ':BufferClose!<CR>', { desc = 'Buffer close' })
+-- vim.keymap.set('n', '<leader>bk!', ':BufferClose!<CR>', { desc = 'Buffer close without saving anything' })
 vim.keymap.set('n', '<leader>bn', ':bnext<CR>', { desc = 'Switch to next buffer' })
 vim.keymap.set('n', '<leader>bp', ':bprev<CR>', { desc = 'Switch to previous buffer' })
 
@@ -66,7 +66,7 @@ vim.keymap.set('n', '<leader>bp', ':bprev<CR>', { desc = 'Switch to previous buf
 -- explorer 
 vim.g.netrw_liststyle = 3
 -- vim.keymap.set('n', '<leader>ve', ':Vexplore<CR>', { desc = 'Toggle an explorer' })
--- vim.keymap.set('n', '<leader>e', ':Explore<CR>', { desc = 'Toggle an explorer' })
+vim.keymap.set('n', '<leader>ec', ':Lexplore<CR>', { desc = 'Toggle an explorer' })
 vim.keymap.set('n', '<leader>e', function ()
     local relative_path = vim.fn.expand("%:h")
     local startPos, endPos = string.find(relative_path, "/")
@@ -83,7 +83,7 @@ vim.keymap.set('n', '<leader>e', function ()
         vim.cmd("call netrw#Call('NetrwBrowseUpDir', 1)")
         vim.cmd(":normal n<CR>zz")
     end
-    vim.cmd(":vertical resize -30")
+    -- vim.cmd(":vertical resize -35")
 end)
 
 -- Install package manager
@@ -247,9 +247,12 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
+      'nvim-treesitter/nvim-treesitter-context',
     },
     build = ':TSUpdate',
   },
+
+
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
