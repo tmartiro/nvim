@@ -68,7 +68,7 @@ vim.keymap.set('n', '<C-.>', ':vertical resize +10<CR>', { desc = 'Resize Window
 -- explorer ini
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>', { desc = 'Toggle an explorer' })
+vim.keymap.set('n', '<leader>e', ':NvimTreeFindFileToggle<CR>', { desc = 'Toggle an explorer' })
 
 -- default file manager must be disabled in order to use nvim-tree
 -- vim.g.netrw_liststyle = 3
