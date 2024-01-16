@@ -32,7 +32,7 @@ return {
     --
     -- See `:help LspAttach` for more information about this autocmd event.
     vim.api.nvim_create_autocmd('LspAttach', {
-      
+
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach-format', { clear = true }),
       -- This is where we attach the autoformatting for reasonable clients
       callback = function(args)
@@ -44,11 +44,10 @@ return {
         if not client.server_capabilities.documentFormattingProvider then
           return
         end
-        
+
 
         -- Tsserver usually works poorly. Sorry you work with bad languages
         -- You can remove this line if you know what you're doing :)
-        print('client.name', client.server_capabilities)
 
         if client.name == 'tsserver' then
           return
