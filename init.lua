@@ -48,7 +48,7 @@ vim.keymap.set('n', '<leader>gg', ':Neogit<CR>', { desc = 'Run neogit' })
 
 -- terminal exit key remap
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
-vim.keymap.set('n', '<leader>t', ':ToggleTerm<CR>', { desc = 'Toggle a horizontal terminal' })
+vim.keymap.set('n', '<leader>ht', ':ToggleTerm<CR>', { desc = 'Toggle a horizontal terminal' })
 vim.keymap.set('n', '<leader>vt', ':ToggleTerm direction=vertical size=100 <CR>', { desc = 'Toggle a vertical terminal' })
 vim.keymap.set('n', '<leader>ft', ':ToggleTerm direction=float <CR>', { desc = 'Toggle a floating terminal' })
 
