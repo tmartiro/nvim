@@ -376,6 +376,10 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>dn', vim.diagnostic.goto_next, { desc = 'Switch to the next diagnostic Message' })
+vim.keymap.set('n', '<leader>dp', vim.diagnostic.goto_prev, { desc = 'Switch to the next diagnostic Message' })
+vim.keymap.set('n', '<leader>dr', vim.lsp.buf.rename, { desc = 'Rename identifier using lsp knowledge(refactor)' })
+vim.keymap.set('n', '<leader>dca', vim.lsp.buf.code_action, { desc = 'Code actions provided by lsp' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 
 -- [[ Configure Treesitter ]]
