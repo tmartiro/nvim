@@ -73,8 +73,8 @@ vim.keymap.set('n', '<leader>e', ':NvimTreeFindFileToggle<CR>', { desc = 'Toggle
 
 -- oil file manager
 vim.keymap.set('n', '<leader>o', ':Oil<CR>', { desc = 'Toggle Oil File Manager' })
-
-
+vim.keymap.set('n', '<A-Down>', ':m +1<CR>', { desc = 'Move line down' })
+vim.keymap.set('n', '<A-Up>', ':m -2<CR>', { desc = 'Move line up' })
 
 -- default file manager must be disabled in order to use nvim-tree
 --
