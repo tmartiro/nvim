@@ -1,19 +1,18 @@
 return {
-  "navarasu/onedark.nvim",
-  -- "folke/tokyonight.nvim",
-  -- "ellisonleao/gruvbox.nvim",
-  -- "savq/melange-nvim",
-  -- "rebelot/kanagawa.nvim",
-  -- 'ribru17/bamboo.nvim',
-  -- 'NTBBloodbath/doom-one.nvim',
+  "aliqyan-21/darkvoid.nvim",
+
   priority = 1000,
-  config = function()
-    -- vim.cmd.colorscheme 'tokyonight'
+  init = function()
+    local themeName = 'darkvoid'
     local opt = {
-      style = "cool",
+      colors = {
+        func = "#FFFF00",
+        identifier = "#F5F5DC",
+        type = "#FFFF00",
+      }
     }
-    onedark = require("onedark")
-    onedark.setup(opt)
-    vim.cmd.colorscheme 'onedark'
+    local theme = require(themeName)
+    theme.setup(opt)
+    vim.cmd.colorscheme(themeName)
   end,
 }
