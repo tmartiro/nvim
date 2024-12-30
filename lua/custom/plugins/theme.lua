@@ -9,6 +9,7 @@ return {
         func = "#FFFF00",
         identifier = "#F5F5DC",
         type = "#FFFF00",
+        string = "#1BFD9C"
       }
     }
     local theme = require(themeName)
