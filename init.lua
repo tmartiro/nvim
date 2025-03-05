@@ -59,8 +59,8 @@ vim.keymap.set('n', '<leader>cf', ':Format<CR>', { desc = 'Format the document' 
 -- buffers
 vim.keymap.set('n', '<leader>bk', ':BufferClose!<CR>', { desc = 'Buffer close' })
 -- vim.keymap.set('n', '<leader>bk!', ':BufferClose!<CR>', { desc = 'Buffer close without saving anything' })
-vim.keymap.set('n', '<leader>bn', ':bnext<CR>', { desc = 'Switch to next buffer' })
-vim.keymap.set('n', '<leader>bp', ':bprev<CR>', { desc = 'Switch to previous buffer' })
+vim.keymap.set('n', '<Tab>', ':bnext<CR>', { desc = 'Switch to next buffer' })
+vim.keymap.set('n', '<S-Tab>', ':bprev<CR>', { desc = 'Switch to previous buffer' })
 vim.keymap.set('n', '<C-\\,', ':vertical resize -10<CR>', { desc = 'Resize Window Vertically To -' })
 vim.keymap.set('n', '<C-.>', ':vertical resize +10<CR>', { desc = 'Resize Window Vertically To +' })
 
@@ -215,6 +215,9 @@ require('lazy').setup({
         component_separators = '|',
         section_separators = '',
       },
+      sections = {
+        lualine_c = { { 'filename', path = 1 } }, -- Show full path
+      },
     },
   },
 
@@ -286,7 +289,7 @@ require('lazy').setup({
 -- NOTE: You can change these options as you wish!
 
 -- Set highlight on search
-vim.o.hlsearch = false
+-- vim.o.hlsearch = false
 
 -- Make line numbers default
 vim.wo.number = true
@@ -356,6 +359,15 @@ require('telescope').setup {
     },
   },
 }
+
+
+-- Restore cursor position
+vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+  pattern = { "*" },
+  callback = function()
+    vim.api.nvim_exec('silent! normal! g`"zv', false)
+  end,
+})
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -514,7 +526,7 @@ end
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  -- clangd = {},
+  clangd = {},
   -- gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
