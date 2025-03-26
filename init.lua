@@ -57,7 +57,7 @@ vim.keymap.set('n', '<leader>cf', ':Format<CR>', { desc = 'Format the document' 
 
 
 -- buffers
-vim.keymap.set('n', '<leader>bk', ':BufferClose!<CR>', { desc = 'Buffer close' })
+vim.keymap.set('n', '<leader>bk', ':bd!<CR>', { desc = 'Buffer close' })
 -- vim.keymap.set('n', '<leader>bk!', ':BufferClose!<CR>', { desc = 'Buffer close without saving anything' })
 vim.keymap.set('n', '<Tab>', ':bnext<CR>', { desc = 'Switch to next buffer' })
 vim.keymap.set('n', '<S-Tab>', ':bprev<CR>', { desc = 'Switch to previous buffer' })
