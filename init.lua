@@ -46,6 +46,9 @@ vim.g.maplocalleader = ' '
 -- neogit
 vim.keymap.set('n', '<leader>gg', ':Neogit<CR>', { desc = 'Run neogit' })
 
+
+-- async run
+vim.keymap.set('n', '<leader>r', ':AsyncRun ', { desc = 'Run async command with output in quickfix' })
 -- terminal exit key remap
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
 vim.keymap.set('n', '<leader>ht', ':ToggleTerm<CR>', { desc = 'Toggle a horizontal terminal' })
@@ -58,6 +61,9 @@ vim.keymap.set('n', '<leader>cf', ':Format<CR>', { desc = 'Format the document' 
 
 -- buffers
 vim.keymap.set('n', '<leader>bk', ':bd!<CR>', { desc = 'Buffer close' })
+vim.keymap.set('n', '<leader>wq', ':close<CR>', { desc = 'Close current window' })
+vim.keymap.set('n', '<leader>wv', ':vsplit<CR>', { desc = 'Split vertically' })
+vim.keymap.set('n', '<leader>wh', ':split<CR>', { desc = 'Split horizontally' })
 -- vim.keymap.set('n', '<leader>bk!', ':BufferClose!<CR>', { desc = 'Buffer close without saving anything' })
 vim.keymap.set('n', '<Tab>', ':bnext<CR>', { desc = 'Switch to next buffer' })
 vim.keymap.set('n', '<S-Tab>', ':bprev<CR>', { desc = 'Switch to previous buffer' })
