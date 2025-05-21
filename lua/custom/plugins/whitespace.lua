@@ -1,6 +1,6 @@
 return {
     'johnfrankmorgan/whitespace.nvim',
-    config = function ()
+    config = function()
         require('whitespace-nvim').setup({
             -- configuration options and their defaults
 
