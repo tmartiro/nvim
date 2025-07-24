@@ -378,6 +378,21 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
+-- remove trailing whitespaces
+vim.keymap.set('n', '<Leader>wt', [[:%s/\s\+$//e<cr>]], { desc = "Remove trailing whitespaces" })
+vim.keymap.set('v', '<Leader>wt', [[:s/\s\+$//e<cr>]], { desc = "Remove trailing whitespaces" })
+
+-- format doc
+vim.keymap.set('n', '<Leader>wf', function() vim.lsp.buf.format() end, { desc = "Format buffer" })
+vim.keymap.set('v', '<Leader>wf', function()
+  vim.lsp.buf.format({
+    range = {
+      ['start'] = vim.api.nvim_buf_get_mark(0, '<'),
+      ['end'] = vim.api.nvim_buf_get_mark(0, '>')
+    }
+  })
+end, { desc = "Format selection" })
+
 -- See `:help telescope.builtin`
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
