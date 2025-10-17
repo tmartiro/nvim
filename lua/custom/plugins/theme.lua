@@ -1,16 +1,16 @@
+-- return {
+--   'dracula/vim',
+--   priority = 1000,
+--   config = function()
+--     vim.cmd.colorscheme("dracula")
+--     vim.o.termguicolors = true
+--   end,
+-- }
+
 return {
-  -- 'ellisonleao/gruvbox.nvim',
-  -- 'dracula/vim',
-  -- 'raphael-proust/vacme',
-  -- 'lunacookies/vim-plan9',
-  'wesleimp/min-theme.nvim',
-  -- 'navarasu/onedark.nvim',
+  "vim-scripts/wombat256.vim",
   priority = 1000,
   config = function()
-    -- vim.cmd.colorscheme("dracula")
-    -- vim.cmd.colorscheme("desert")
-    -- vim.cmd.colorscheme("plan9")
-    -- vim.cmd.colorscheme("vacme")
-    vim.cmd.colorscheme("min-dark")
+    vim.cmd.colorscheme("wombat256mod")
   end,
 }

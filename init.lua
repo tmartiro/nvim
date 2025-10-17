@@ -77,32 +77,15 @@ vim.g.loaded_netrwPlugin = 1
 vim.keymap.set('n', '<leader>e', ':NvimTreeFindFileToggle<CR>', { desc = 'Toggle an explorer' })
 
 
+-- git blame toggle
+vim.keymap.set('n', '<leader>gb', ':GitBlameToggle<CR>', { desc = 'Enable/Disable git blame functionality' })
 -- oil file manager
 vim.keymap.set('n', '<leader>o', ':Oil<CR>', { desc = 'Toggle Oil File Manager' })
 vim.keymap.set('n', '<A-Down>', ':m +1<CR>', { desc = 'Move line down' })
 vim.keymap.set('n', '<A-Up>', ':m -2<CR>', { desc = 'Move line up' })
 
--- default file manager must be disabled in order to use nvim-tree
---
--- vim.g.netrw_liststyle = 3
--- vim.keymap.set('n', '<leader>ec', ':Lexplore<CR>', { desc = 'Toggle an explorer' })
--- vim.keymap.set('n', '<leader>e', function()
---   local relative_path = vim.fn.expand("%:h")
---   local startPos, endPos = string.find(relative_path, "/")
---   if startPos == 1 then
---     relative_path = "."
---   end
---   vim.cmd [[:let @/=expand("%:t")]]
---   vim.cmd("Lexplore " .. relative_path)
---   if startPos and startPos > 1 then
---     while startPos ~= nil do
---       startPos, endPos = string.find(relative_path, "/", endPos + 1)
---       vim.cmd("call netrw#Call('NetrwBrowseUpDir', 1)")
---     end
---     vim.cmd("call netrw#Call('NetrwBrowseUpDir', 1)")
---     vim.cmd(":normal n<CR>zz")
---   end
--- end)
+-- background
+vim.opt.background = "dark"
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -120,11 +103,6 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- NOTE: Here is where you install your plugins.
---  You can configure plugins using the `config` key.
---
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
@@ -596,6 +574,9 @@ require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
 cmp.setup {
+  completion = {
+    autocomplete = false, -- disable auto popup
+  },
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
