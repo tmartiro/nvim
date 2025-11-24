@@ -51,9 +51,9 @@ vim.keymap.set('n', '<leader>gg', ':Neogit<CR>', { desc = 'Run neogit' })
 vim.keymap.set('n', '<leader>r', ':AsyncRun ', { desc = 'Run async command with output in quickfix' })
 -- terminal exit key remap
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>')
-vim.keymap.set('n', '<leader>ht', ':ToggleTerm<CR>', { desc = 'Toggle a horizontal terminal' })
-vim.keymap.set('n', '<leader>vt', ':ToggleTerm direction=vertical size=100 <CR>', { desc = 'Toggle a vertical terminal' })
-vim.keymap.set('n', '<leader>ft', ':ToggleTerm direction=float <CR>', { desc = 'Toggle a floating terminal' })
+-- vim.keymap.set('n', '<leader>ht', ':ToggleTerm<CR>', { desc = 'Toggle a horizontal terminal' })
+-- vim.keymap.set('n', '<leader>vt', ':ToggleTerm direction=vertical size=100 <CR>', { desc = 'Toggle a vertical terminal' })
+-- vim.keymap.set('n', '<leader>ft', ':ToggleTerm direction=float <CR>', { desc = 'Toggle a floating terminal' })
 
 -- format the code
 vim.keymap.set('n', '<leader>cf', ':Format<CR>', { desc = 'Format the document' })
