@@ -85,7 +85,7 @@ vim.keymap.set('n', '<A-Down>', ':m +1<CR>', { desc = 'Move line down' })
 vim.keymap.set('n', '<A-Up>', ':m -2<CR>', { desc = 'Move line up' })
 
 -- background
-vim.opt.background = "dark"
+-- vim.opt.background = "dark"
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -308,7 +308,14 @@ vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
-vim.o.termguicolors = true
+-- vim.o.termguicolors = true
+
+-- vim.o.cursorline = true
+-- vim.cmd([[
+--   highlight CursorLine guibg=lightgray guifg=black
+--   highlight Cursor guibg=black
+-- ]])
+
 
 -- [[ Basic Keymaps ]]
 
@@ -335,6 +342,12 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
+    layout_strategy = "horizontal",
+    layout_config = {
+      preview_width = 0.65,
+      width = 0.95,
+      height = 0.95,
+    },
     mappings = {
       i = {
         ['<C-u>'] = false,
@@ -616,6 +629,11 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+
+vim.lsp.config('*', {
+  exit_timeout = 50,
+})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
